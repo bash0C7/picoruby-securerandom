@@ -43,13 +43,16 @@ SecureRandom.hex(64)             # => 128-character lowercase hex string (64 byt
 `SecureRandom::HEX_DIGITS` lookup) rather than `unpack1("H*")`, since
 that needs `mruby-pack`, which this gem doesn't require.
 
-## Where this is tested
+## Testing
 
-This gem doesn't (yet) carry its own test suite. Its behavior is exercised
-via [bash0C7/bash0c7-homepage](https://github.com/bash0C7/bash0c7-homepage)'s
-`test/picoruby/securerandom_test.rb`, where it supplies the `SecureRandom`
-that [Sinatra](https://github.com/udzura/picoruby-sinatra-covers) calls
-while loading (`set :session_secret, SecureRandom.hex(64)`).
+```
+rake test
+```
+
+Fetches and builds a PicoRuby VM into `vendor/` (git-ignored, not pinned
+to any particular version) on first run, then runs `test/` against it
+with [picoruby-picotest](https://github.com/picoruby/picoruby/tree/master/mrbgems/picoruby-picotest).
+`rake clean` removes `vendor/`; `rake clean_test` runs both in sequence.
 
 ## License
 
